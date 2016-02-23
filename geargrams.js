@@ -1,4 +1,8 @@
-/* Copyright (c) 2016 GearGrams LLC */
+/*
+Copyright (c) 2016 GearGrams LLC 
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl.html
+*/
 
 var gg = new function() {
 
@@ -8,9 +12,12 @@ this.defaultListUnitIDs = {};
 this.gearItems = {};
 this.units = {};
 
+/* 
+categoryData is an associative array of processed data about categories for lists
 
+categoryData objects structure
 
-/* categoryData object structure
+categoryData[listId] = 
 {
 	cats:Object; // {total:Float, gearItems:Array, listItems:Array, name:String, canNames:Array}
     catNames:Array;

@@ -8,8 +8,8 @@ Description: Display GearGrams Lists
 Version: 0.2.3
 Author: GearGrams LLC
 Author URI: http://www.gargrams.com
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl.html
 */
 
 /*
