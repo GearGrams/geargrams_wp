@@ -27,6 +27,8 @@ DEFINE("GEARGRAMS_CATEGORIES", "");
 DEFINE("GEARGRAMS_DIAMETER", "300");
 DEFINE("GEARGRAMS_LEGEND_WIDTH", "230");
 DEFINE("GEARGRAMS_LEGEND_HEIGHT", "500");
+DEFINE("GEARGRAMS_UNIT", "gram");
+DEFINE("GEARGRAMS_TOTALS", "all");
 
 DEFINE( 'GEARGRAMS__PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -54,14 +56,15 @@ function load()
 }
 
 add_action('wp_enqueue_scripts', 'load');
-add_shortcode("gg-full", "gg_full_handler");
-add_shortcode("gg-minimal", "gg_minimal_handler");
-add_shortcode("gg-pie-chart", "gg_piechart_handler");
-add_shortcode("gg-legend", "gg_legend_handler");
+add_shortcode("gg-full", "gg_full");
+add_shortcode("gg-minimal", "gg_minimal");
+add_shortcode("gg-pie-chart", "gg_piechart");
+add_shortcode("gg-legend", "gg_legend");
+add_shortcode("gg-heading", "gg_heading");
 
 header("Access-Control-Allow-Origin: https://www.geargrams.com");
 
-function gg_full_handler($atts)
+function gg_full($atts)
 {
 	$atts=shortcode_atts(array(
 		"list_id" => GG_LIST_ID,
@@ -76,7 +79,7 @@ function gg_full_handler($atts)
   return $output;
 }
 
-function gg_minimal_handler($atts)
+function gg_minimal($atts)
 {
 	$elementId = 'geargrams_content' . nextListId();
 
@@ -87,7 +90,7 @@ function gg_minimal_handler($atts)
 	), $atts);
 	
 	$output .= '<div id="' . $elementId . '" class="geargrams">';
-	$output .= '<script>gg_displayMinimal("';
+	$output .= '<script>gg.displayMinimal("';
 		$output .= $elementId . '", "';
 		$output .= $atts["list_id"] . '", "';
 		$output .= $atts["title"]  . '", "';
@@ -98,7 +101,7 @@ function gg_minimal_handler($atts)
   return $output;
 }
 
-function gg_piechart_handler($atts)
+function gg_piechart($atts)
 {
 	$elementId = 'geargrams_content' . nextListId();
 
@@ -110,7 +113,7 @@ function gg_piechart_handler($atts)
 	), $atts);
 	
 	$output .= '<div id="' . $elementId . '" class="geargrams">';
-	$output .= '<script>gg_displayPieChart("';
+	$output .= '<script>gg.displayPieChart("';
 		$output .= $elementId . '", "';
 		$output .= $atts["list_id"] . '", "';
 		$output .= $atts["diameter"] . '", "';
@@ -122,7 +125,7 @@ function gg_piechart_handler($atts)
   return $output;
 }
 
-function gg_legend_handler($atts)
+function gg_legend($atts)
 {
 	$elementId = 'geargrams_content' . nextListId();
 
@@ -135,13 +138,37 @@ function gg_legend_handler($atts)
 	), $atts);
 	
 	$output .= '<div id="' . $elementId . '" class="geargrams">';
-	$output .= '<script>gg_displayLegend("';
+	$output .= '<script>gg.displayLegend("';
 		$output .= $elementId . '", "';
 		$output .= $atts["list_id"] . '", "';
 		$output .= $atts["width"] . '", "';
 		$output .= $atts["height"] . '", "';
 		$output .= $atts["title"]  . '", "';
 		$output .= $atts["categories"];
+	$output .= '");</script>';
+	$output .= '</div>';
+
+  return $output;
+}
+
+function gg_heading($atts)
+{
+	$elementId = 'geargrams_content' . nextListId();
+
+	$atts=shortcode_atts(array(
+		"list_id" => GG_LIST_ID,
+		"title" => GEARGRAMS_TITLE, 
+		"unit" => GEARGRAMS_UNIT,
+		"totals" => GEARGRAMS_TOTALS
+	), $atts);
+	
+	$output .= '<div id="' . $elementId . '" class="geargrams">';
+	$output .= '<script>gg.displayHeading("';
+		$output .= $elementId . '", "';
+		$output .= $atts["list_id"] . '", "';
+		$output .= $atts["title"] . '", "';
+		$output .= $atts["unit"] . '", "';
+		$output .= $atts["totals"];
 	$output .= '");</script>';
 	$output .= '</div>';
 

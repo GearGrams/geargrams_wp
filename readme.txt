@@ -29,7 +29,7 @@ Or follow the instructions at https://wordpress.org/plugins/wp-d3/installation/
 Alternatly you can use GitHub Updater to install directly from the git repo.
 
 1. Install https://github.com/afragen/github-updater
-2. From the GitHub updater settings install the GearGrams using: https://github.com/Randonee/geargrams_wp
+2. From the GitHub updater settings install the GearGrams using: https://github.com/GearGrams/geargrams_wp
 
 == Usage ==
 
@@ -94,6 +94,31 @@ Add the following shortcodes to any text in wordpress
 	* Example
 		* [gg-pie-graph list_id="123"]
 		* [gg-pie-graph list_id="4432" categories="food,clothing" title="Food and Clothing"]
+
+
+* gg_heading
+	* Displays a list title and weight totals
+	* Attributes
+		* list_id
+			* Required
+			* The id of the list to be displayed
+		* title
+			* Optional
+			* The title of the list.
+			* Default: gg_default (this gives the actual name of the list)
+		* unit
+			* Optional
+			* The unit to be used for the weights.
+			* Accepted values: default,gram, lbs, oz, kg
+			* Default: default
+		* totals
+			* Optional
+			* Comma seprated list of total types.
+			* Accepted Values: all, total, pack, worn, consumable
+			* Default: "all"
+	* Example
+		* [gg-heading list_id="123"]
+		* [gg-headingh list_id="4432" title="List Total and Pack Weights" totals="total,pack"]
 
 
 
