@@ -48,11 +48,11 @@ this.displayMinimal = function(elementID, listId, categoriesStr)
 		{
 			html += '<li class="gg_gategory">' + categoriesToShow[a] + ' <span class="gg_weight">' + obj.getWeightLabel(cData.cats[categoriesToShow[a]].total, obj.defaultListUnitIDs[listId])  +'</span>';
 				
-			var gearItems = cData.cats[categoriesToShow[a]].gearItems;
 			var listItems = cData.cats[categoriesToShow[a]].listItems;
 			html += "<ul>";	
 			for(var b=0; b < gearItems.length; ++b)
 			{
+				var gearItem = obj.gearItems[listItems[b].gearItemId];
 				html += '<li class="gg_item">';
 				if(gearItems[b].url != null && gearItems[b] != "")
 					html += '<a href="' + gearItems[b].url + '">' + gearItems[b].name + '</a>';
@@ -93,7 +93,6 @@ this.displayPieChart = function(elementID, listId, diameter, pie, categoriesStr)
 		var h = diameter;
 		var r = h/2;
 		var color = d3.scale.category20();
-		
 		var data = [];
 				          
 		for(var a=0; a < categoriesToShow.length; ++a)
@@ -255,20 +254,19 @@ this.displayTable = function(elementID, listId, categoriesStr)
 			html += '<td style="width:50%"></td><td style="width:10%"></td><td style="width:20%"></td></tr>';
 
 			var count = 0;
-			var gearItems = cData.cats[categoriesToShow[a]].gearItems;
 			var listItems = cData.cats[categoriesToShow[a]].listItems;
 
 			for(var b=0; b < listItems.length; ++b)
 			{
 				html += '<tr class="gg_item">';
-				var listItem = obj.getById(listItems, listItems[b].uid);
-				var gearItem = obj.getById(gearItems, listItems[b].gearItemId);
+				var listItem = listItems[b];
+				var gearItem = obj.gearItems[listItems[b].gearItemId];
+
 				html += '<td>';
 				if(gearItem.url != null && gearItem.url != "")
 					html += '<a href="' + gearItem.url + '">' + gearItem.name + '</a>';
 				else
 					html += gearItem.name;
-
 
 				if(listItem.worn || listItem.consumable)
 				{
@@ -283,11 +281,8 @@ this.displayTable = function(elementID, listId, categoriesStr)
 				}
 					
 				html += '</td>';
-
 				html +='<td>' + gearItem.description + "</td>";
-				
 				html +='<td>' + listItem.quantity + "</td>";
-
 				html += '<td>' + obj.getWeightLabel(gearItem.gramWeight * listItem.quantity, gearItem.weightUnitId) +  '</td>';
 				html += "</tr>";
 
@@ -349,6 +344,8 @@ this.retrieveList = function(listId, handler, errorHandler)
 
 this.getCategoryData = function(gearListItems, listId)
 {
+	var obj = this;
+
 	if(listId != null && this.categoryData[listId] != null)
 		return this.categoryData[listId];
 
@@ -372,7 +369,6 @@ this.getCategoryData = function(gearListItems, listId)
 			returnData.catNames.push(gItem.category);
 		}
 		returnData.cats[objName].total += gItem.gramWeight;
-		returnData.cats[objName].gearItems.push(gItem);
 		returnData.cats[objName].listItems.push(gearListItems[a]);
 		var itemWeight = gItem.gramWeight * gearListItems[a].quantity;
 		returnData.totalWeight += itemWeight;
@@ -382,6 +378,26 @@ this.getCategoryData = function(gearListItems, listId)
 			returnData.consumableTotal += itemWeight;
 	}
 	returnData.catNames = returnData.catNames.sort();
+
+	for(cat in returnData.cats)
+	{
+		var catObj = returnData.cats[cat];
+		catObj.listItems.sort(function(a,b)
+		{
+			var gearItemA = obj.gearItems[a.gearItemId];
+			var gearItemB = obj.gearItems[b.gearItemId];
+
+			if(gearItemA.name.toLowerCase() < gearItemB.name.toLowerCase())
+				return -1;
+			else if(gearItemA.name.toLowerCase() > gearItemB.name.toLowerCase())
+				return 1;
+			else
+				return 0;
+		});
+		
+		for(listItem in catObj.listItems)
+			catObj.gearItems.push(obj.gearItems[listItem.gearItemId]);
+	}
 
 	if(listId != null)
 		this.categoryData[listId] = returnData;
@@ -408,9 +424,9 @@ this.getCategoriesToShow = function(categoriesStr, allCategories)
 	if(catsToShow == null || catsToShow.length == 0)
 	{
 		catsToShow = allCategories.slice(0, allCategories.length);
-		return catsToShow.map(Function.prototype.call, String.prototype.toLowerCase);
+		return catsToShow.map(Function.prototype.call, String.prototype.toLowerCase).sort();
 	}
-	return catsToShow;
+	return catsToShow.sort();
 };
 
 this.getWeightLabel = function(gramWeight, unitId)
@@ -450,21 +466,6 @@ this.getUnitWithName = function(name)
 	}
 	return null;
 };
-
-this.getById = function(arr, id)
-{
-	if(arr == null || id == null)
-		return null;
-
-	for(a = 0; a < arr.length; ++a)
-	{
-		if(arr[a].uid == id)
-			return arr[a];
-	}
-
-	return null;
-}
-
 
 };
 
