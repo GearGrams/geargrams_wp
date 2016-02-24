@@ -391,6 +391,8 @@ this.getCategoryData = function(gearListItems, listId)
 
 this.parseCategoryStr = function(categoriesStr)
 {
+	if(categoriesStr == null)
+		return [];
 	var categoriesToShow = null;
 	if(categoriesStr != "")
 	{
