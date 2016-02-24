@@ -61,6 +61,7 @@ add_shortcode("gg-minimal", "gg_minimal");
 add_shortcode("gg-pie-chart", "gg_piechart");
 add_shortcode("gg-legend", "gg_legend");
 add_shortcode("gg-heading", "gg_heading");
+add_shortcode("gg-table", "gg_table");
 
 header("Access-Control-Allow-Origin: https://www.geargrams.com");
 
@@ -79,13 +80,32 @@ function gg_full($atts)
   return $output;
 }
 
+function gg_table($atts)
+{
+	$elementId = 'geargrams_content' . nextListId();
+
+	$atts=shortcode_atts(array(
+		"list_id" => GG_LIST_ID,
+		"categories" => GEARGRAMS_CATEGORIES    
+	), $atts);
+	
+	$output .= '<div id="' . $elementId . '" class="geargrams">';
+	$output .= '<script>gg.displayTable("';
+		$output .= $elementId . '", "';
+		$output .= $atts["list_id"] . '", "';
+		$output .= $atts["categories"];
+	$output .= '");</script>';
+	$output .= '</div>';
+
+  return $output;
+}
+
 function gg_minimal($atts)
 {
 	$elementId = 'geargrams_content' . nextListId();
 
 	$atts=shortcode_atts(array(
 		"list_id" => GG_LIST_ID,
-		"title" => GEARGRAMS_TITLE,
 		"categories" => GEARGRAMS_CATEGORIES    
 	), $atts);
 	
@@ -93,7 +113,6 @@ function gg_minimal($atts)
 	$output .= '<script>gg.displayMinimal("';
 		$output .= $elementId . '", "';
 		$output .= $atts["list_id"] . '", "';
-		$output .= $atts["title"]  . '", "';
 		$output .= $atts["categories"];
 	$output .= '");</script>';
 	$output .= '</div>';
@@ -108,7 +127,6 @@ function gg_piechart($atts)
 	$atts=shortcode_atts(array(
 		"list_id" => GG_LIST_ID,
 		"diameter" => GEARGRAMS_DIAMETER,
-		"title" => GEARGRAMS_TITLE,
 		"categories" => GEARGRAMS_CATEGORIES    
 	), $atts);
 	
@@ -117,7 +135,6 @@ function gg_piechart($atts)
 		$output .= $elementId . '", "';
 		$output .= $atts["list_id"] . '", "';
 		$output .= $atts["diameter"] . '", "';
-		$output .= $atts["title"]  . '", "';
 		$output .= $atts["categories"];
 	$output .= '");</script>';
 	$output .= '</div>';
@@ -133,7 +150,6 @@ function gg_legend($atts)
 		"list_id" => GG_LIST_ID,
 		"width" => GEARGRAMS_LEGEND_WIDTH,
 		"height" => GEARGRAMS_LEGEND_HEIGHT,
-		"title" => GEARGRAMS_TITLE,
 		"categories" => GEARGRAMS_CATEGORIES    
 	), $atts);
 	
@@ -143,7 +159,6 @@ function gg_legend($atts)
 		$output .= $atts["list_id"] . '", "';
 		$output .= $atts["width"] . '", "';
 		$output .= $atts["height"] . '", "';
-		$output .= $atts["title"]  . '", "';
 		$output .= $atts["categories"];
 	$output .= '");</script>';
 	$output .= '</div>';

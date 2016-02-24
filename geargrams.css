@@ -46,4 +46,56 @@ License URI: http://www.gnu.org/licenses/gpl.html
 	padding-right: 5px;
 }
 
+.geargrams .gg_gear_table h4{
+	white-space: nowrap;
+	margin-bottom:5px;
+	display:inline-block;
+	font-size:1.5em;
+}
+
+.geargrams .gg_gear_table h4{
+	text-decoration: none;
+}
+
+.geargrams .gg_gear_table td{
+	padding:5px;
+}
+
+.geargrams .gg_gear_table .gg_weight{
+	
+}
+
+.gg_gear_table table{
+	width:100%;
+	border:none;
+	table-layout: auto;
+}
+
+.gg_gear_table tr.gg_item:nth-child(even) {
+    background-color: #F9F9F9;
+}
+
+.gg_gear_table tr.gg_item:nth-child(odd) {
+    background-color: #FDFDFD;
+}
+
+tr.gg_category{
+	margin-top: 10px;
+}
+
+.gg_gear_table td{
+	border: none;
+}
+
+.gg_gear_table td a{
+	text-decoration: none;
+	box-shadow: none;
+}
+
+.gg_gear_table tr td:last-child{
+	text-align: right;
+}
+
+
+
 

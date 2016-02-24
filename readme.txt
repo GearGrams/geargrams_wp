@@ -52,23 +52,33 @@ Add the following shortcodes to any text in wordpress
 	* Example
 		* [gg-full list_id="123" width="800" height="500"]
 
+* gg-table
+	* Displays a list in table form
+	* Attributes
+		* list_id
+			* Required
+			* The id of the list to be displayed
+		* categories
+			* Optional
+			* Comma seprated list of categories. example: "food,clothing"
+			* Default: "" (empty string means all categories are displayed)
+	* Examples
+		* [gg-table list_id="123"]
+		* [gg-table list_id="4432" categories="food,clothing"]
+
 * gg-minimal
 	* Adds a simple text list.
 	* Attributes
 		* list_id
 			* Required
 			* The id of the list to be displayed
-		* title
-			* Optional
-			* The title of the list.
-			* Default: gg_default (this gives the actual name of the list)
 		* categories
 			* Optional
 			* Comma seprated list of categories. example: "food,clothing"
 			* Default: "" (empty string means all categories are displayed)
 	* Examples
 		* [gg-minimal list_id="123"]
-		* [gg-minimal list_id="4432" categories="food,clothing" title="Pack List"]
+		* [gg-minimal list_id="4432" categories="food,clothing"]
 
 
 * gg-pie-graph
@@ -81,11 +91,6 @@ Add the following shortcodes to any text in wordpress
 			* Optional
 			* The diameter of the pie
 			* default 300
-		* title
-			* Optional
-			* The title of the list.
-			* If set to an empty string then no title will display.
-			* Default: ""
 		* categories
 			* Optional
 			* Comma seprated list of categories. example: "food,clothing"
@@ -93,7 +98,7 @@ Add the following shortcodes to any text in wordpress
 			* Default: ""
 	* Example
 		* [gg-pie-graph list_id="123"]
-		* [gg-pie-graph list_id="4432" categories="food,clothing" title="Food and Clothing"]
+		* [gg-pie-graph list_id="4432" categories="food,clothing"]
 
 
 * gg_heading

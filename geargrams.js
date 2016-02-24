@@ -31,7 +31,7 @@ this.categoryData = {};
 
 //-------------------------------- Shortcode Functions ------------------------------
 
-this.displayMinimal = function(elementID, listId, title, categoriesStr)
+this.displayMinimal = function(elementID, listId, categoriesStr)
 {
 	var obj = this;
 
@@ -72,17 +72,6 @@ this.displayMinimal = function(elementID, listId, title, categoriesStr)
 		
 		html += "</ul>";
 		
-		if(title != null && title != "")
-		{
-			var titleHTML = '<div class="gg_header">';
-			if(title == "gg_default")
-				titleHTML += "<h3>" + obj.lists[listId].name + "</h3>";
-			else
-				titleHTML += "<h3>" + title + "</h3>";
-				
-			 titleHTML += '<span class="gg_weight">' + obj.getWeightLabel(cData.totalWeight, obj.defaultListUnitIDs[listId]) + "</span></div>";
-			 html = titleHTML + html;
-		}
 		document.getElementById(elementID).innerHTML = html;
 	}
 
@@ -90,7 +79,7 @@ this.displayMinimal = function(elementID, listId, title, categoriesStr)
 };
 
 
-this.displayPieChart = function(elementID, listId, diameter, title, categoriesStr)
+this.displayPieChart = function(elementID, listId, diameter, pie, categoriesStr)
 {
 	var obj = this;
 
@@ -131,7 +120,7 @@ this.displayPieChart = function(elementID, listId, diameter, title, categoriesSt
 };
 
 
-this.displayLegend = function(elementID, listId, width, height, title, categoriesStr)
+this.displayLegend = function(elementID, listId, width, height, categoriesStr)
 {
 	var obj = this;
 
@@ -241,9 +230,83 @@ this.displayHeading = function(elementID, listId, title, unit, totals)
 
 		document.getElementById(elementID).innerHTML = html;
 	}
-
 	this.retrieveList(listId, success, function(){});
 };
+
+this.displayTable = function(elementID, listId, categoriesStr)
+{
+	var obj = this;
+
+	success = function()
+	{
+		var gearListItems = obj.lists[listId].gearListItems;
+		var cData = obj.getCategoryData(gearListItems, listId);
+		var categoriesToShow = obj.getCategoriesToShow(categoriesStr, cData.catNames);
+
+		var element = document.getElementById(elementID);
+
+		element.className += " gg_gear_table";
+		var html = "";
+
+		html += '<table cellspacing="0" cellpadding="0">';
+		for(var a=0; a < categoriesToShow.length; ++a)
+		{
+			html += '<tr class="gg_category"><td><h4>' + cData.cats[categoriesToShow[a]].name + '</h4>';
+			html += '<td style="width:50%"></td><td style="width:10%"></td><td style="width:20%"></td></tr>';
+
+			var count = 0;
+			var gearItems = cData.cats[categoriesToShow[a]].gearItems;
+			var listItems = cData.cats[categoriesToShow[a]].listItems;
+
+			for(var b=0; b < listItems.length; ++b)
+			{
+				html += '<tr class="gg_item">';
+				var listItem = obj.getById(listItems, listItems[b].uid);
+				var gearItem = obj.getById(gearItems, listItems[b].gearItemId);
+				html += '<td>';
+				if(gearItem.url != null && gearItem.url != "")
+					html += '<a href="' + gearItem.url + '">' + gearItem.name + '</a>';
+				else
+					html += gearItem.name;
+
+
+				if(listItem.worn || listItem.consumable)
+				{
+					html += '<div style="float:right">';
+					if(listItem.worn)
+						html += '<img style="width:13px" src="" />';
+
+					if(listItem.consumable)
+						html += '<img style="width:13px" src="" />';
+
+					html += '</div>';
+				}
+					
+				html += '</td>';
+
+				html +='<td>' + gearItem.description + "</td>";
+				
+				html +='<td>' + listItem.quantity + "</td>";
+
+				html += '<td>' + obj.getWeightLabel(gearItem.gramWeight * listItem.quantity, gearItem.weightUnitId) +  '</td>';
+				html += "</tr>";
+
+				++count;
+			}
+
+			html += '<tr> <td style="padding-top:5px;"></td> <td></td> <td style="text-align:right">Total</td><td style="text-align:right; color:#111111;">';
+			html += obj.getWeightLabel(cData.cats[categoriesToShow[a]].total, 1);
+			html += "</td></tr>";
+		}
+		
+		html += "</table>";
+
+		document.getElementById(elementID).innerHTML = html;return html;
+	}
+
+	this.retrieveList(listId, success, function(){});
+
+}
 
 
 //-------------------------------- Helper Functions ------------------------------
@@ -339,7 +402,7 @@ this.parseCategoryStr = function(categoriesStr)
 
 this.getCategoriesToShow = function(categoriesStr, allCategories)
 {
-	var catsToShow = categoriesStr;
+	var catsToShow = this.parseCategoryStr(categoriesStr);
 	if(catsToShow == null || catsToShow.length == 0)
 	{
 		catsToShow = allCategories.slice(0, allCategories.length);
@@ -385,6 +448,20 @@ this.getUnitWithName = function(name)
 	}
 	return null;
 };
+
+this.getById = function(arr, id)
+{
+	if(arr == null || id == null)
+		return null;
+
+	for(a = 0; a < arr.length; ++a)
+	{
+		if(arr[a].uid == id)
+			return arr[a];
+	}
+
+	return null;
+}
 
 
 };
