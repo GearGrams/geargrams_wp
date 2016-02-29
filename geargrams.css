@@ -18,6 +18,12 @@ License URI: http://www.gnu.org/licenses/gpl.html
 	margin-bottom:10px;
 }
 
+.geargrams .gg_unit{
+	font-size: .8em;
+	padding-left: 3px;
+	padding-right: 4px;
+}
+
 .geargrams .gg_gategory{
  font-size:1em;
 }
@@ -96,6 +102,42 @@ tr.gg_category{
 	text-align: right;
 }
 
+.geargrams .gg_legend1{
+	border:none;
+	width: auto ;
+}
 
+.geargrams .gg_legend1 .gg_colorBox {
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+	margin-right: 4px;
+	vertical-align: middle;
+}
 
+.geargrams .gg_legend1 tr:first-child td{
+	padding-bottom: 5px;
+	text-decoration: underline;
+	font-size: 1.1em;
+}
 
+.geargrams .gg_legend1 tr{
+	line-height: 1.1em;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.geargrams .gg_legend1 td{
+	border: none;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-right: 15px;
+}
+
+.geargrams .gg_legend1 tr td:first-child{
+	text-align: left;
+}
+
+.geargrams .gg_legend1 tr td:last-child{
+	text-align: right;
+}

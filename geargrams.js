@@ -12,6 +12,27 @@ this.defaultListUnitIDs = {};
 this.gearItems = {};
 this.units = {};
 
+this.category20b = [ "#1f77b4",
+				"#aec7e8",
+				"#ff7f0e",
+				"#ffbb78",
+				"#2ca02c",
+				"#98df8a",
+				"#d62728",
+				"#ff9896",
+				"#9467bd",
+				'#c5b0d5',
+				"#8c564b",
+				"#c49c94",
+				"#e377c2",
+				"#f7b6d2",
+				"#7f7f7f",
+				"#c7c7c7",
+				"#bcbd22",
+				"#dbdb8d",
+				"#17becf",
+				"#9edae5"];
+
 /* 
 categoryData is an associative array of processed data about categories for lists
 
@@ -79,7 +100,7 @@ this.displayMinimal = function(elementID, listId, categoriesStr)
 };
 
 
-this.displayPieChart = function(elementID, listId, diameter, pie, categoriesStr)
+this.displayPieChart = function(elementID, listId, diameter, categoriesStr)
 {
 	var obj = this;
 
@@ -114,10 +135,8 @@ this.displayPieChart = function(elementID, listId, diameter, pie, categoriesStr)
 		        return arc(d);
 		    });
 	}
-
 	this.retrieveList(listId, success, function(){});		
 };
-
 
 this.displayLegend = function(elementID, listId, width, height, categoriesStr)
 {
@@ -132,41 +151,24 @@ this.displayLegend = function(elementID, listId, width, height, categoriesStr)
 		var gearListItems = obj.lists[listId].gearListItems;
 		var cData = obj.getCategoryData(gearListItems, listId);
 		var categoriesToShow = obj.getCategoriesToShow(categoriesStr, cData.catNames);
-		
-		var labels = [];
-		for(index in categoriesToShow)
+
+		var html = '<table cellspacing="0" cellpadding="0" class="gg_legend1"><td >Category</td><td>Weight</td><td>%</td></tr>';
+		for(var a=0; a < categoriesToShow.length; ++a)
 		{
-			var catName = categoriesToShow[index];
-			labels.push(catName + ", " + obj.getWeightLabel(cData.cats[catName].total, obj.defaultListUnitIDs[listId]));
+			html += '<tr>';
+			html += '<td>' +' <div class="gg_colorBox" style="background-color:' + obj.category20b[a] + '">&nbsp;</div>';
+			html += categoriesToShow[a] + '</td>';
+			html += '<td>' + obj.getWeightLabel(cData.cats[categoriesToShow[a]].total, obj.defaultListUnitIDs[listId]) + '</td>';
+
+			var percent = cData.cats[categoriesToShow[a]].total/cData.totalWeight;
+			html += '<td>' + Math.round(percent * 100) + '%</td>';
+			html += '</tr>';
 		}
-		
-	    var legend = d3.select(document.getElementById(elementID)).append("svg:svg").attr("width", width).attr("height", height)
-	    	.append("g")
-	    	.selectAll("g")
-	    	.data(labels)
-	    	.enter()
-	    	.append('g')
-			.attr('class', 'legend')
-			.attr('transform', function(d, i)
-			{
-	    	   	var height = legendRectSize;
-	    	   	var x = 0;
-	    	   	var y = i * height;
-	    	   	return 'translate(' + x + ',' + y + ')';
-	    	});
-	    
-	    legend.append('rect')
-	    	.attr('width', legendRectSize)
-	    	.attr('height', legendRectSize)
-	    	.style('fill', d3.scale.category20())
-	    	.style('stroke', d3.scale.category20());
 
-		legend.append('text')
-	   		.attr('x', legendRectSize + legendSpacing)
-	    	.attr('y', legendRectSize - legendSpacing)
-	    	.text(function(d) { return d; });
+		html += '</table>';
+
+		document.getElementById(elementID).innerHTML = html;
 	}
-
 	this.retrieveList(listId, success, function(){});	
 };
 
@@ -188,7 +190,6 @@ this.displayHeading = function(elementID, listId, title, unit, totals)
 			else
 				html += "<h3>" + title + "</h3>";
 		}
-
 
 		var gearListItems = obj.lists[listId].gearListItems;
 		var cData = obj.getCategoryData(gearListItems, listId);
@@ -298,9 +299,7 @@ this.displayTable = function(elementID, listId, categoriesStr)
 
 		document.getElementById(elementID).innerHTML = html;return html;
 	}
-
 	this.retrieveList(listId, success, function(){});
-
 }
 
 
@@ -443,16 +442,16 @@ this.getWeightLabel = function(gramWeight, unitId)
 		var ounces = Math.round((ounceGrams / oz.gramWeight) * 100) / 100;
 
 		if(pounds > 0)
-			weightString = pounds + "  " + lbs.abbreviation + " ";
+			weightString = '<span class="gg_weight">' + pounds + '<span><span class="gg_unit">' + lbs.abbreviation + "</span>";
 
-		weightString += ounces + " " + oz.abbreviation;
+		weightString += '<span class="gg_weight">' + ounces + '<span><span class="gg_unit">' + oz.abbreviation + "</span>";
 	}
 	else
 	{
 		if(gramWeight >= 1000)
-			weightString = Math.round((gramWeight/1000) * 100) / 100 + " kg";
+			weightString = '<span class="gg_weight">' + Math.round((gramWeight/1000) * 100) / 100 + '<span><span class="gg_unit">kg</span>';
 		else
-			weightString = Math.round(gramWeight) + " g";
+			weightString = '<span class="gg_weight">' + Math.round(gramWeight) + '<span><span class="gg_unit">g</span>';
 	}
 	return weightString;
 };
