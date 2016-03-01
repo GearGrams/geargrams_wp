@@ -113,7 +113,6 @@ this.displayPieChart = function(elementID, listId, diameter, categoriesStr)
 		var w = diameter;
 		var h = diameter;
 		var r = h/2;
-		var color = d3.scale.category20();
 		var data = [];
 				          
 		for(var a=0; a < categoriesToShow.length; ++a)
@@ -129,7 +128,7 @@ this.displayPieChart = function(elementID, listId, diameter, categoriesStr)
 		var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
 		arcs.append("svg:path")
 		    .attr("fill", function(d, i){
-		        return color(i);
+		        return obj.category20b[i];
 		    })
 		    .attr("d", function (d) {
 		        return arc(d);
@@ -146,7 +145,6 @@ this.displayLegend = function(elementID, listId, width, height, categoriesStr)
 	{
 		var legendRectSize = 18;
 	    var legendSpacing = 4;
-	    var color = d3.scale.category20b();
 
 		var gearListItems = obj.lists[listId].gearListItems;
 		var cData = obj.getCategoryData(gearListItems, listId);
