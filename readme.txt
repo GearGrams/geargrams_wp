@@ -9,16 +9,18 @@ License URI: http://www.gnu.org/licenses/gpl.html
 Stable tag: none
 Contributors: 000
 
-With the GearGrams Wordpress plugin you can show GearGrams lists in wordpress. This plugin is in development and is likely to change.
+With the GearGrams Wordpress plugin you can show GearGrams lists in wordpress.
 
  == Description ==
 
+This plugins adds short codes that can be added to most anywhere in wordpress.
 
-
+If you haven’t used wordpress short codes you can read more about them here:
+https://codex.wordpress.org/shortcode
 
 == Installation ==
 
-First you must install the Wp-D3 plugin which is used for graphs.
+* First you must install the Wp-D3 plugin which is used for graphs.
 You can do this by searching for Wp-D3 in the add new plugins of your wordpress admin.
 Or follow the instructions at https://wordpress.org/plugins/wp-d3/installation/
 
@@ -31,7 +33,7 @@ Alternatly you can use GitHub Updater to install directly from the git repo.
 1. Install https://github.com/afragen/github-updater
 2. From the GitHub updater settings install the GearGrams using: https://github.com/GearGrams/geargrams_wp
 
-== Usage ==
+= Usage =
 
 Add the following shortcodes to any text in wordpress
 
@@ -127,6 +129,12 @@ Add the following shortcodes to any text in wordpress
 
 
 
+ == Frequently Asked Questions == 
+
+.
 
 
+== Screenshots ==
 
+Live example here:
+http://blog.geargrams.com/devils-punchbowl/
