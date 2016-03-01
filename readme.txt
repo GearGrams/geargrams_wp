@@ -37,22 +37,6 @@ Alternatly you can use GitHub Updater to install directly from the git repo.
 
 Add the following shortcodes to any text in wordpress
 
-* gg-full
-	* Adds a full report view style list
-	* Attributes
-		* list_id
-			* Required
-			* The id of the list to be displayed
-		* width
-			* Optional
-			* The width of the list
-			* default: 100%
-		* height
-			* Optional
-			* The height of the list
-			* default: 600
-	* Example
-		* [gg-full list_id="123" width="800" height="500"]
 
 * gg-table
 	* Displays a list in table form
@@ -126,6 +110,23 @@ Add the following shortcodes to any text in wordpress
 	* Example
 		* [gg-heading list_id="123"]
 		* [gg-headingh list_id="4432" title="List Total and Pack Weights" totals="total,pack"]
+
+* gg-full
+	* Adds a full report view style list
+	* Attributes
+		* list_id
+			* Required
+			* The id of the list to be displayed
+		* width
+			* Optional
+			* The width of the list
+			* default: 100%
+		* height
+			* Optional
+			* The height of the list
+			* default: 600
+	* Example
+		* [gg-full list_id="123" width="800" height="500"]
 
 
 
