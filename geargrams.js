@@ -289,7 +289,7 @@ this.displayTable = function(elementID, listId, categoriesStr)
 			}
 
 			html += '<tr> <td style="padding-top:5px;"></td> <td></td> <td style="text-align:right">Total</td><td style="text-align:right; color:#111111;">';
-			html += obj.getWeightLabel(cData.cats[categoriesToShow[a]].total, 1);
+			html += obj.getWeightLabel(cData.cats[categoriesToShow[a]].total, obj.defaultListUnitIDs[listId]);
 			html += "</td></tr>";
 		}
 		
