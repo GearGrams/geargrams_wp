@@ -1,6 +1,6 @@
 /*
 Copyright (c) 2016 GearGrams LLC 
-License: GPLv3
+License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 */
 
