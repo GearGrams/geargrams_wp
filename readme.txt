@@ -13,7 +13,10 @@ With the GearGrams Wordpress plugin you can show GearGrams lists in wordpress.
 
  == Description ==
 
-This plugins adds short codes that can be added to most anywhere in wordpress.
+
+With this plugin you can show GearGrams.com lists along with graphs in wordpress. 
+ 
+Specifically this plugins adds short codes that can be added to most anywhere in wordpress.
 
 If you haven’t used wordpress short codes you can read more about them here:
 https://codex.wordpress.org/shortcode
@@ -27,11 +30,6 @@ Or follow the instructions at https://wordpress.org/plugins/wp-d3/installation/
 
 1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-
-Alternatly you can use GitHub Updater to install directly from the git repo.
-
-1. Install https://github.com/afragen/github-updater
-2. From the GitHub updater settings install the GearGrams using: https://github.com/GearGrams/geargrams_wp
 
 = Usage =
 
