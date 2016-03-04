@@ -7,7 +7,6 @@ Tested up to: 4.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 Stable tag: none
-Contributors: 000
 
 With the GearGrams Wordpress plugin you can show GearGrams lists in wordpress.
 
@@ -135,5 +134,6 @@ Add the following shortcodes to any text in wordpress
 
 == Screenshots ==
 
+1. Display of heading, list, graph and legend
 Live example here:
 http://blog.geargrams.com/devils-punchbowl/
