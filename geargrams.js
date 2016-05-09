@@ -314,7 +314,7 @@ this.retrieveList = function(listId, handler, errorHandler)
 	{
 		jQuery.ajax(
 		{
-        	url: "https://www.geargrams.com/api/gearlist/" + listId,
+        	url: "https://www.geargrams.com/api/gearlist/" + listId + "?refer=" + window.location.href,
         	data: {},
         	success:function(data)
         	{

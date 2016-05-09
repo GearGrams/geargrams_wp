@@ -3,7 +3,7 @@ Donate link: https://www.geargrams.com/
 Depends: Wp-D3
 Tags: geargrams, lists, backpacking
 Requires at least: 3.0.1
-Tested up to: 4.4.1
+Tested up to: 4.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 Stable tag: none

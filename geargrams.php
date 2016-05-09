@@ -89,7 +89,7 @@ function gg_table($atts)
 		"categories" => GEARGRAMS_CATEGORIES    
 	), $atts);
 	
-	$output .= '<div id="' . $elementId . '" class="geargrams">';
+	$output = '<div id="' . $elementId . '" class="geargrams">';
 	$output .= '<script>gg.displayTable("';
 		$output .= $elementId . '", "';
 		$output .= $atts["list_id"] . '", "';
@@ -109,7 +109,7 @@ function gg_minimal($atts)
 		"categories" => GEARGRAMS_CATEGORIES    
 	), $atts);
 	
-	$output .= '<div id="' . $elementId . '" class="geargrams">';
+	$output = '<div id="' . $elementId . '" class="geargrams">';
 	$output .= '<script>gg.displayMinimal("';
 		$output .= $elementId . '", "';
 		$output .= $atts["list_id"] . '", "';
@@ -130,7 +130,7 @@ function gg_piechart($atts)
 		"categories" => GEARGRAMS_CATEGORIES    
 	), $atts);
 	
-	$output .= '<div id="' . $elementId . '" class="geargrams">';
+	$output = '<div id="' . $elementId . '" class="geargrams">';
 	$output .= '<script>gg.displayPieChart("';
 		$output .= $elementId . '", "';
 		$output .= $atts["list_id"] . '", "';
@@ -153,7 +153,7 @@ function gg_legend($atts)
 		"categories" => GEARGRAMS_CATEGORIES    
 	), $atts);
 	
-	$output .= '<div id="' . $elementId . '" class="geargrams">';
+	$output = '<div id="' . $elementId . '" class="geargrams">';
 	$output .= '<script>gg.displayLegend("';
 		$output .= $elementId . '", "';
 		$output .= $atts["list_id"] . '", "';
@@ -177,7 +177,7 @@ function gg_heading($atts)
 		"totals" => GEARGRAMS_TOTALS
 	), $atts);
 	
-	$output .= '<div id="' . $elementId . '" class="geargrams">';
+	$output = '<div id="' . $elementId . '" class="geargrams">';
 	$output .= '<script>gg.displayHeading("';
 		$output .= $elementId . '", "';
 		$output .= $atts["list_id"] . '", "';
