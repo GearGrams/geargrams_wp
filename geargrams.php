@@ -5,7 +5,7 @@ Plugin URI: http://www.geargrams.com/wordpress
 Depends: Wp-D3
 GitHub Plugin URI: https://github.com/Randonee/geargrams_wp
 Description: Display GearGrams Lists
-Version: 0.5
+Version: 0.6
 Author: GearGrams LLC
 Author URI: http://www.gargrams.com
 License: GPLv2 or later
